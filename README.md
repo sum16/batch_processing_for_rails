@@ -7,4 +7,4 @@
 
 
 # ER図
-![](public/er_diagram.png)
+![ER図](https://user-images.githubusercontent.com/66477859/133884329-6adb4de4-4440-426e-8d4e-5122866ad244.png)
