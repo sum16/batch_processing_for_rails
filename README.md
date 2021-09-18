@@ -7,4 +7,4 @@
 
 
 # ER図
-![](https://drive.google.com/drive/folders/1eyB6AVUT0u5DQrCrHVVsubZMKr-5JyBZ)
+![](public/er_diagram.png)
