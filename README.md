@@ -7,4 +7,14 @@
 
 
 # ER図
-![ER図](https://user-images.githubusercontent.com/66477859/133884329-6adb4de4-4440-426e-8d4e-5122866ad244.png)
+![ER図](https://user-images.githubusercontent.com/66477859/133884329-6adb4de4-4440-426e-8d4e-5122866ad244.png)  
+  
+  
+## lib/tasks/ranksファイルにバッチ処理を定義  
+  
+  
+## 使用コマンド
+実行可能なrailsのコマンドが一覧として表示、その中に**今rakeファイルに定義したコマンド**がある
+bin/rails -vT  
+  
+
