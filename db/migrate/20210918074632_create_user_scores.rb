@@ -5,6 +5,7 @@ class CreateUserScores < ActiveRecord::Migration[6.1]
       # 対象テーブルを先頭から順にシーケンシャルに探していく（＝インデックスのない状態）
       # インデックスを参照して該当レコードのIDを調べる。（＝インデックスのある状態
       t.references :user, null: false, index: true, foreign_key: { on_delete: :cascade, on_update: :cascade }, comment: 'ユーザー'
+      # cscadeは親のテーブルの削除や更新に合わせて子テーブルも更新してくれるようになる(on_deleteはトリガー)　cascadeはon_deleteの場合,参照先が無くなると同時に削除される sql参照
       t.integer :score, null: false, default: 0, comment: 'ユーザーが獲得した点数'
       t.datetime :received_at, null: false, index: true, comment: '点数を獲得した日時'
 
@@ -13,7 +14,7 @@ class CreateUserScores < ActiveRecord::Migration[6.1]
   end
 end
 
-# WHEREやJOINで使用される → インデックス候補
+# sqlでWHEREやJOINが使用される → インデックス候補
 # インデックスは特定のカラムから該当するレコードを探すために使用されるので、WHEREやJOINで指定されるカラムはインデックス候補となる。
 
 # レコード件数が1万件を超えるテーブル → インデックス候補
