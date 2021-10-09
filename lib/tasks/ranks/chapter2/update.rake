@@ -15,6 +15,13 @@ namespace :ranks do
       #3 ユーザーごとのスコア合計の降順に並べ替え、そこからランキング情報を再作成する
       sorted_total_score_groups = user_total_scores.group_by { |score| score[:total_score]}
       .sort_by{ |score, _| score * -1 }.to_h.values
+
+      #4
+      sorted_total_score_groups.each.with_index(1) do |scores, index|
+        scores.each do |total_score|
+          Rank.create(user_id: total_score[:user_id], rank: index, score: total_score[:total_score])
+        end
+      end
     end
 
     desc 'chapter2 ゲーム内のユーザーランキング情報をリセットする'
@@ -54,3 +61,6 @@ end
 # to_hをつけると　{9=>[{:user_id=>5, :total_score=>9}], 8=>[{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}], 3=>[{:user_id=>3, :total_score=>3}], 1=>[{:user_id=>4, :total_score=>1}]}
 # valuesでハッシュの値のみを取得 デバックすると
 # [[{:user_id=>5, :total_score=>9}], [{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}], [{:user_id=>3, :total_score=>3}], [{:user_id=>4, :total_score=>1}]]
+
+#1-4
+# Enumerator#with_index(1)でインデクスを＋１の状態でスタートできる
