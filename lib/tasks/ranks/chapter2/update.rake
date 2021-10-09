@@ -4,7 +4,7 @@ namespace :ranks do
     # ※1
     task update: :environment do
       #1 現在のランキング情報をリセット
-      # Rank.delete_all
+      Rank.delete_all
 
       #2 ユーザーごとにスコアの合計を計算する
       user_total_scores = User.all.map do |user|
@@ -41,11 +41,11 @@ end
 # config/environment.rbを読み込み、productionやdeveropmentといった実行環境ごとの設定を反映している
 # namespaceを定義すると、バッチ処理を実行するときのコマンド名を修飾することができる → namespaceを使って何のupdateであるのかを表現
 
-# 1-2
+#2
 # p user_total_scores
 # →[{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}, {:user_id=>3, :total_score=>3}, {:user_id=>4, :total_score=>1}, {:user_id=>5, :total_score=>9}]
 
-# 1-3 処理の流れ  
+#3 処理の流れ
 # 上記のuser_total_scoresがまず|score|に入り、score[:total_score]、つまりスコアの数字(3や8)ごとにグループ化をしている。同じtotal_scoreのハッシュをグルーピングしている
 # p sorted_total_score_groupsで変数をのぞいてみると
 # {8=>[{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}], 3=>[{:user_id=>3, :total_score=>3}], 1=>[{:user_id=>4, :total_score=>1}], 9=>[{:user_id=>5, :total_score=>9}]}
@@ -62,5 +62,5 @@ end
 # valuesでハッシュの値のみを取得 デバックすると
 # [[{:user_id=>5, :total_score=>9}], [{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}], [{:user_id=>3, :total_score=>3}], [{:user_id=>4, :total_score=>1}]]
 
-#1-4
+#4
 # Enumerator#with_index(1)でインデクスを＋１の状態でスタートできる
