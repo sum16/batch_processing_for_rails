@@ -22,7 +22,10 @@ docker-compose up -d
 mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_dev  
   
 ※ テーブル情報を表示  
-mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_dev -e'SELECT * FROM users'
+mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_dev -e'SELECT * FROM users'  
+  
+※ テストデータへアクセス  
+mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_test -e'SELECT * FROM users'
 
 
 ## 使用コマンド  
@@ -33,4 +36,7 @@ bin/rails -vT
 タスク実行  
 bin/rails ranks:chapter2:update
   
+テスト実行  
+bundle exec rspec -f d  
+（-f dでテスケースごとの説明や詳細を表示してくれる）
 
