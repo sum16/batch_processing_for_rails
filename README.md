@@ -13,7 +13,20 @@
 ## lib/tasks/ranksファイルにバッチ処理を定義  
   
   
-## 使用コマンド
+## Setup
+  
+※ Mysqlコンテナ立ち上げ  
+docker-compose up -d  
+  
+※ batch_processing_for_rails_devに接続  
+mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_dev  
+  
+※ テーブル情報を表示  
+mysql -h 127.0.0.1 -u root -p batch_processing_for_rails_dev -e'SELECT * FROM users'
+
+
+## 使用コマンド  
+
 実行可能なrailsのコマンドが一覧として表示、その中に**rakeファイルに定義したコマンド**がある  
 bin/rails -vT  
   
