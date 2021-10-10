@@ -7,7 +7,6 @@ class RanksUpdater
       
       create_ranks
 
-      raise ActiveRecord::Rollback
     end
   end
 
