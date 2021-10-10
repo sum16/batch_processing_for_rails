@@ -58,5 +58,8 @@ less -R log/development.log
 tail log/development.log  
   
 テスト実行  
-USER_AMOUNT=100 bin/rails db:seed 
+USER_AMOUNT=100 bin/rails db:seed  
+  
+NSERTがどのくらい実行されているかを確認  
+grep INSERT log/development.log | wc -l
 
