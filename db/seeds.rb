@@ -2,30 +2,29 @@
 Rank.delete_all
 User.delete_all
 
-# ¥ユーザー情報（*親から作成*）
-user1 = User.create(id: 1, name: 'ゲーム太郎')
-user2 = User.create(id: 2, name: 'ゲームガイ')
-user3 = User.create(id: 3, name: 'ゲーム好き')
-user4 = User.create(id: 4, name: 'ゲーム大臣')
-user5 = User.create(id: 5, name: 'ゲーム将軍')
+# 環境変数のUSER_AMOUNTを受け取り、文字列型から数値に変換
+# この環境変数を変更することで任意の数のテストデータを作成することが可能
+user_amount = ENV['USER_AMOUNT'].to_i
 
-# ユーザーごとの得点
-UserScore.create(user_id: user1.id, score: 3, received_at: Time.current)
-UserScore.create(user_id: user1.id, score: 4, received_at: Time.current)
-UserScore.create(user_id: user1.id, score: 1, received_at: Time.current)
+User.transaction do
+  1.upto(user_amount) do |i|
+    user = User.create(id: i, name: "#{i}人目のゲームユーザー")
+    # ユーザーごとの得点
+    rand(30).times do
+      UserScore.create(user_id: user.id, score: rand(1..100), received_at: Time.current.ago(rand(0..60).days))
+    end
+  end
+end
 
-UserScore.create(user_id: user2.id, score: 2, received_at: Time.current)
-UserScore.create(user_id: user2.id, score: 2, received_at: Time.current)
-UserScore.create(user_id: user2.id, score: 4, received_at: Time.current)
+# テスト実行コード
+# USER_AMOUNT=100 bin/rails db:seed 
 
-UserScore.create(user_id: user3.id, score: 1, received_at: Time.current)
-UserScore.create(user_id: user3.id, score: 1, received_at: Time.current)
-UserScore.create(user_id: user3.id, score: 1, received_at: Time.current)
+# self から max まで 1 ずつ増やしながら繰り返します。
+# 5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
 
-UserScore.create(user_id: user4.id, score: 0, received_at: Time.current)
-UserScore.create(user_id: user4.id, score: 1, received_at: Time.current)
-UserScore.create(user_id: user4.id, score: 0, received_at: Time.current)
-
-UserScore.create(user_id: user5.id, score: 3, received_at: Time.current)
-UserScore.create(user_id: user5.id, score: 3, received_at: Time.current)
-UserScore.create(user_id: user5.id, score: 3, received_at: Time.current)
+# randメソッド
+# 擬似乱数を生成してくれるメソッド
+# irb(main):002:0> rand(5) # 0以上5未満の整数を返す
+# => 2
+# irb(main):003:0> rand(1..5) # rangeで指定された範囲の値を返す
+# => 5
