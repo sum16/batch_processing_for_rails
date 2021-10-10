@@ -56,4 +56,7 @@ less -R log/development.log
   
 ファイルの最後の部分を一定量表示してくれるコマンド  
 tail log/development.log  
+  
+テスト実行  
+USER_AMOUNT=100 bin/rails db:seed 
 
