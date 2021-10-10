@@ -6,6 +6,8 @@ class RanksUpdater
       Rank.delete_all
       
       create_ranks
+
+      raise ActiveRecord::Rollback
     end
   end
 
