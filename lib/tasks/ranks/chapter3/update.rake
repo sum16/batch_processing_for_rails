@@ -12,13 +12,12 @@ namespace :ranks do
       Development::UsedMemoryReport.instance.puts_all
 
 
-
       # 実行時間を測定するためにBenchmarkを使用
-      # Benchmark.bm 10 do |r|
-      #   r.report 'RanksUpdater' do
-      #     RanksUpdater.new.update_all
-      #   end
-      # end
+      Benchmark.bm 10 do |r|
+        r.report 'RanksUpdater' do
+          RanksUpdater.new.update_all
+        end
+      end
     end
   end
 end
