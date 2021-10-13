@@ -8,6 +8,7 @@ module Development
       @reports = []
     end
 
+    # メモリ消費量を測定するメソッド
     def write(label)
       @reports << "used memory: #{label} #{ObjectSpace.memsize_of_all * 0.001 * 0.001} MB"
     end
