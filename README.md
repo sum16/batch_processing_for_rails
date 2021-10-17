@@ -57,7 +57,7 @@ less -R log/development.log
 ファイルの最後の部分を一定量表示してくれるコマンド  
 tail log/development.log  
   
-テスト実行  
+テストデータ挿入  
 USER_AMOUNT=100 bin/rails db:seed  
   
 NSERTがどのくらい実行されているかを確認  
