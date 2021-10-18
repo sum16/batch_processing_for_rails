@@ -38,3 +38,7 @@ end
 # Singletonモジュールを読み込んだクラスのインスタンスを利用するときはnewではなく、instanceを使用する
 # Development::UsedMemoryReport.instanceとすることで、バッチ処理実行中の
 # Development::UsedMemoryReportクラスのインスタンスはどこから利用してもひとつの同じインスタンスを参照する
+
+# ・requireは外部ファイルやライブラリを読み込むのに使う
+# ・includeはモジュールをクラス内で呼ぶために使う
+# 今回はクラス内でないためDevelopment::UsedMemoryReportと記載していると思われる

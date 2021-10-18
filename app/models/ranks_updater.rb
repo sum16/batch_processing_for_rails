@@ -5,8 +5,8 @@ class RanksUpdater
       # 現在のランキング情報をリセット
       Rank.delete_all
       
+      # ランキングを作成するメソッド
       create_ranks
-
     end
   end
 
@@ -21,7 +21,6 @@ class RanksUpdater
   #   sorted_total_score_groups = user_total_scores.group_by { |score| score[:total_score]}
   #   .sort_by{ |score, _| score * -1 }.to_h.values
 
-  #   #4
   #   sorted_total_score_groups.each.with_index(1) do |scores, index|
   #     scores.each do |total_score|
   #       Rank.create(user_id: total_score[:user_id], rank: index, score: total_score[:total_score])

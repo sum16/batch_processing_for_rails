@@ -16,9 +16,12 @@ namespace :ranks do
       sorted_total_score_groups = user_total_scores.group_by { |score| score[:total_score]}
       .sort_by{ |score, _| score * -1 }.to_h.values
 
+      # p  sorted_total_score_groups
+
       #4
       sorted_total_score_groups.each.with_index(1) do |scores, index|
         scores.each do |total_score|
+          p total_score
           Rank.create(user_id: total_score[:user_id], rank: index, score: total_score[:total_score])
         end
       end
@@ -50,10 +53,17 @@ end
 # p sorted_total_score_groupsで変数をのぞいてみると
 # {8=>[{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}], 3=>[{:user_id=>3, :total_score=>3}], 1=>[{:user_id=>4, :total_score=>1}], 9=>[{:user_id=>5, :total_score=>9}]}
 
-# scoreに-1を掛けた値を基準に昇順で並び替えれば、降順での並び替えを実行することが可能 並び替えの条件に-1をかけることで-5,-4,-3..となり、実際のスコアは5,4,3..と降順になる
+# scoreに-1を掛けた値を基準に昇順で並び替えれば、降順での並び替えを実行することが可能 
+# 並び替えの条件に-1をかけ、昇順とすることで-5,-4,-3..となり、実際のスコアは5,4,3..と降順になる
 # sort_byのブロックはハッシュの値を|キー, 値|の形で受け取りますが、並び替えに値は使用していません。今回の値だと{:user_id=>1, :total_score=>8}など..
 # Rubyではブロック内で未使用の値はアンダースコア（_）の記号にする慣習があります。
 # 実際、そのほうが未使用であることが明示的に伝わるため読みやすいコードになるでしょう。
+
+# Hash#values
+# ハッシュの全値の配列を返す
+# 例)
+# h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+# p h1.values         #=> [100, ["some"], "c"]
 
 # sort_byを加えた上でデバックすると
 # [[9, [{:user_id=>5, :total_score=>9}]], [8, [{:user_id=>1, :total_score=>8}, {:user_id=>2, :total_score=>8}]], [3, [{:user_id=>3, :total_score=>3}]], [1, [{:user_id=>4, :total_score=>1}]]]
@@ -64,3 +74,12 @@ end
 
 #4
 # Enumerator#with_index(1)でインデクスを＋１の状態でスタートできる
+
+# p total_score
+# {:user_id=>5, :total_score=>1440}
+# {:user_id=>1, :total_score=>1369}
+# {:user_id=>22, :total_score=>1340}
+# {:user_id=>15, :total_score=>1216}
+
+# 配列の中の要素が１個ずつ出力されている
+
